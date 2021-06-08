@@ -1,0 +1,7 @@
+SELECT buildings.office_name Название_офиса,    consumption.SUM(cookies) Потребление
+FROM buildings
+INNER JOIN consumption USING(coffee_point_id)
+GROUP BY Название_офиса
+HAVING Потребление < 1000
+ORDER BY DESC
+LIMIT 10;

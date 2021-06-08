@@ -1,0 +1,17 @@
+#1) Доля_заказов_с_промокодами 
+
+SELECT (SELECT  COUNT(*) FROM
+orders
+WHERE promocode_id is not null)/(COUNT(*)+1) as Доля_заказов_с_промокодами FROM orders
+;
+
+#2) Самый популярный промокод (название) и число его использований
+
+SELECT promocodes.name as Самый_популярный_промокод, 
+COUNT(orders.promocode_id) as число_использований
+FROM orders
+INNER join promocodes USING(promocode_id)
+GROUP BY orders.promocode_id
+ORDER BY число_использований DESC
+LIMIT 1;
+
